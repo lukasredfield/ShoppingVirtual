@@ -1,0 +1,53 @@
+{% extends "ProyectoWebApp/Base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div style="margin: 35px; margin-left: 85px; ">
+    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'ProyectoWebApp/img/contacto.jpg' %}" style="float: left">
+
+        <section class="page-section cta" style="margin-bottom: 5em;" >
+             <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4" >
+                <span class="section-heading-upper">Puntualidad</span>
+                <span class="section-heading-lower">El mejor stock</span>
+            </h2>
+        <p class="mb-3">En la puertra de tu casa en menos de 48 h con el envío normal. En menos de 24 h con el envío express.
+            </p>
+        </div>
+  </section>
+</div> 
+
+    <!--<div><p style="color: white;" >{{mi_formulario.as.p}}</p></div>
+    <div><p style="color: white;" >{{mi_formulario.as.ul}}</p></div>-->
+&nbsp;&nbsp;&nbsp;<div class="container" style="position: center;" >
+
+    {% if "valido" in request.GET %}
+
+        <div class="alert alert-info" style="text-align: left; margin-right:100px;">
+            Mensaje enviado correctamente
+          </div>
+
+    {% endif %}
+
+
+</div>
+
+    <div class="contenedorforms" style="margin-top: 10px;">      
+
+    <!--Dentro de la etiqueta "form" vamos a poner "method="POST" para que la información
+    viaje por detras (que no se vea la url) y luego los correspondientes estilos inline.
+    Luego de la etiqueta vamos a abrir llaves y colocar "{% csrf_token %}" para que se genere 
+    un token de seguridad para que no se pueda rellenar el formulario de páginas externas.
+    Es una norma de seguridad que te exigen los navegadores.-->
+    <form action="" method="POST" style="text-align: center;" >
+    {% csrf_token %}
+    <table style="color: white; margin: 20px auto;">{{mi_formulario}}</table>
+    <input type="submit" value="Enviar" style="width: 150px;">
+    </form>
+    </div><br><br>
+
+
+{% endblock %}
+

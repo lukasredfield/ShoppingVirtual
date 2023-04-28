@@ -1,0 +1,64 @@
+{% extends "ProyectoWebApp/Base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% for i in posteos %}
+<!-- Analizando este bucle for: 
+for "postes" que puede ser el nombre que yo quiera ("i", "pepe", etc)
+in "posteos", este objeto es el nombre o "clave" que le di al objeto que se creo dentro de la
+función o "vista" "blog" en la hoja "views". Es la clave o nombre por el cual esta hoja de html va
+a llamar al contenido del objeto "posts=Post.objects.all()" que fue creado allí. Osea cada vuelta de bucle, 
+"postes" va a valer todos las propiedades u objetos que contenga la variable-->
+
+    <section class="page-section clearfix">
+        <div class="container">
+          <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{i.imagen.url}}" alt="foto" style="width: 50%;" >
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+              <h2 class="section-heading mb-4" >
+                <span class="section-heading-lower">{{i.titulo}}</span>
+                <span class="section-heading-upper">{{i.contenido}}</span>
+              </h2>
+              <p class="mb-3" style="text-align: left; font-size: 0.8em; " >Autor: {{i.autor}}</p>
+             
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!--<div style="margin: 15px;" ><p>
+    <h2 style="color: white;" >{{servicio.titulo}}</h2>
+    <p style="color: white;" >{{servicio.contenido}}</p>
+    <p><img src="{{servicio.imagen.url}}" height="200", width="240" ></p>
+
+</p></div>-->
+
+    {% endfor %}
+
+    <section>
+        <div style="width: 75%; margin: auto; text-align: center; color: white;">
+            
+            
+            Categorias: 
+
+          {% for i in posteos %}
+
+            {% for categoria in i.categorias.all %}
+
+             <a href="{% url 'categoriaa' categoria.id %}" class="linkCategorias">{{categoria.nombre}}</a> &nbsp;&nbsp;&nbsp;
+          <!--Vamos a hacer que cada categoria tenga un link a cada filtrado de categoria de posts:
+            Para ello dentro de estas llaves con porcentaje vamos a poner "url" o que nos direccione al "path"
+          "categoriaa" de nuestra hoja de "urls". Dentro de la hoja de "urls" vamos a encontrar la clave "name" 
+          donde nombramos el path "categoriaa". Luego le pasamos el parametro de la tabla categoria
+          de la base de datos que necesitamos en este caso es categoria.id.
+          -->
+           {% endfor %}
+        
+          {% endfor %}
+        
+        </div>
+    </section>
+
+{% endblock %}

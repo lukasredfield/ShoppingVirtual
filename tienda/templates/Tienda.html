@@ -1,0 +1,95 @@
+{% extends "ProyectoWebApp/Base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- BARRA DE BÚSQUEDA ---
+  
+  <div class="container">
+		<div class="row">
+      <div class="col-md-12 search" >
+			<form method="get">
+				<div class="custom-search-input">
+          <div class="input-group col-md-12">
+					<input class="form-control" type="text" placeholder="Buscar..." name="buscar" >
+          <span class="input-group-list" >
+            <i class="icon icon-search"></i>
+            <button type="submit" class="btn btn-success my-2 my-sm-0">Buscar</button>
+          </span>
+				  </div>
+        </div>
+			</form>
+    </div>
+		</div>
+</div>
+
+-->
+
+<div class="container">
+
+
+  {% if request.user.is_authenticated %}
+
+    <!--<div style="float:right;">-->
+
+    {% include "carro/widget.html" %}
+
+    {% else %}
+
+
+    <div class="alert alert-info" style="text-align: left; margin-right:100px;">
+      Inicia sesion para usar el carro
+    </div>
+    
+
+  {% endif %}
+
+</div>
+
+
+<div class="container">
+
+<div class="row">
+
+{% for producto in produs %}
+ 
+    <div class="card" style="width: 30%;">
+  
+      <img src="{{producto.imagen.url}}" alt="" class="card-img-top" >
+
+      <div class="card-body">
+
+          <h6 class="card-title">{{producto.nombre}}</h6>
+
+          <p class="card-text">{{producto.precio}}&nbsp$</p>
+   
+         
+      </div>
+
+    <div class="card-footer">
+
+      <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success btn-sm">Agregar al carro</a>
+
+    </div>
+
+  </div>
+
+  
+{% endfor %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+</div>
+</div><br><br>
+
+
+
+
+{% endblock %}

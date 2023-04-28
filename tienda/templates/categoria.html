@@ -1,0 +1,53 @@
+{% extends "ProyectoWebApp/Base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% for i in produs %}
+
+    <section class="page-section clearfix">
+        <div class="container">
+          <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{i.imagen.url}}" alt="foto" style="width: 50%;" >
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+              <h2 class="section-heading mb-4" >
+                <span class="section-heading-lower">{{i.nombre}}</span>
+                <span class="section-heading-upper">{{i.precio}}$</span>
+                <span class="section-heading-upper">{{i.stock}}</span>
+              </h2>
+             
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!--<div style="margin: 15px;" ><p>
+    <h2 style="color: white;" >{{servicio.titulo}}</h2>
+    <p style="color: white;" >{{servicio.contenido}}</p>
+    <p><img src="{{servicio.imagen.url}}" height="200", width="240" ></p>
+
+</p></div>-->
+
+    {% endfor %}
+
+    <section>
+        <div style="width: 75%; margin: auto; text-align: center; color: white;">
+            
+            
+            Categorias: 
+
+        {% for i in produs %}
+
+        {% for categoria in i.categorias.all %}
+
+            {{categoria2.nombre}} &nbsp;&nbsp;&nbsp;
+
+            {% endfor %}
+        
+        {% endfor %}
+        
+        </div>
+    </section>
+
+{% endblock %}
